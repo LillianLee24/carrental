@@ -1,0 +1,81 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class AboutUsWindow extends JFrame {
+    AboutUsWindow() {
+        setTitle("About Us");
+        setSize(600, 500);
+        setLocationRelativeTo(null); // Центрирование окна по центру экрана
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Закрывать только текущее окно
+
+        // Панель для отображения информации
+        JPanel aboutUsPanel = new JPanel();
+        aboutUsPanel.setLayout(new BorderLayout());
+        aboutUsPanel.setBackground(Color.LIGHT_GRAY); // Серый фон
+
+        // Фотография
+
+
+        // Заголовок "Аренда машин"
+        JLabel titleLabel = new JLabel("Car Rental");
+        titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 32)); // Большой красивый шрифт
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER); // Выравнивание по центру
+        titleLabel.setForeground(Color.WHITE); // Белый шрифт
+        aboutUsPanel.add(titleLabel, BorderLayout.CENTER);
+
+        // Краткая информация
+        JLabel infoLabel = new JLabel("<html>We provide a wide range of cars for rent. Our prices are affordable for everyone. We guarantee quality service. Your satisfaction is our priority. Contact us for your car rental needs.</html>");
+        infoLabel.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        infoLabel.setHorizontalAlignment(SwingConstants.CENTER); // Выравнивание по центру
+        infoLabel.setForeground(Color.WHITE); // Белый шрифт
+        aboutUsPanel.add(infoLabel, BorderLayout.SOUTH);
+
+        // Добавляем панель "О нас" на форму
+        add(aboutUsPanel, BorderLayout.CENTER);
+
+        // Панель для способов оплаты
+        JPanel paymentPanel = new JPanel();
+        paymentPanel.setLayout(new GridLayout(2, 2));
+        paymentPanel.setBackground(Color.LIGHT_GRAY); // Серый фон
+
+        // Надпись для ввода номера карты
+        JLabel cardLabel = new JLabel("Enter card number (12 figures):");
+        JTextField cardField = new JTextField();
+
+        // Кнопка для привязки карты
+        JButton bindCardButton = new JButton("Link card");
+        bindCardButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String cardNumber = cardField.getText();
+                if (cardNumber.length() == 12 && cardNumber.matches("\\d+")) {
+                    JOptionPane.showMessageDialog(null, "Card successfully linked!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Incorrect card number. Enter 12 digits.");
+                }
+            }
+        });
+
+        // Кнопка для другого способа оплаты
+        JButton otherPaymentButton = new JButton("Other payment method");
+        otherPaymentButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Another method of payment has been selected!");
+            }
+        });
+
+        paymentPanel.add(cardLabel);
+        paymentPanel.add(cardField);
+        paymentPanel.add(bindCardButton);
+        paymentPanel.add(otherPaymentButton);
+
+        add(paymentPanel, BorderLayout.NORTH);
+
+        setVisible(true); // Отображаем окно
+    }
+
+    public static void main(String[] args) {
+        new AboutUsWindow();
+    }
+}
